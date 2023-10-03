@@ -1,0 +1,62 @@
+ian@ian-Latitude-E7440:~/Makefile2$ make
+f77   -c -o printct.o printct.f
+gfortran -o printct printct.o printcount.o 
+ian@ian-Latitude-E7440:~/Makefile2$ ./printct
+           4
+ian@ian-Latitude-E7440:~/Makefile2$ cat Makefile
+printct: printct.o printcount.o
+	gfortran -o printct printct.o printcount.o 
+printcount:	printcount.f
+	gfortran printcount.f -c
+main: printct.f
+	gfortran printct.f -c
+
+
+ian@ian-Latitude-E7440:~/Makefile2$ cat printct.f
+           program printct
+           integer count
+           count = 4
+           call printcount(count)
+           end program printct
+ian@ian-Latitude-E7440:~/Makefile2$ cat printcount.f
+       subroutine printcount(number2)
+       integer number2
+       print *, number2
+       end subroutine printcount
+ian@ian-Latitude-E7440:~/Makefile2$ sloccount printct.f printcount.f Makefile
+Have a non-directory at the top, so creating directory top_dir
+Adding /home/ian/Makefile2/printct.f to top_dir
+Adding /home/ian/Makefile2/printcount.f to top_dir
+Adding /home/ian/Makefile2/Makefile to top_dir
+Categorizing files.
+Finding a working MD5 command....
+Found a working MD5 command.
+Computing results.
+
+
+SLOC	Directory	SLOC-by-Language (Sorted)
+9       top_dir         fortran=9
+
+
+Totals grouped by language (dominant language first):
+fortran:          9 (100.00%)
+
+
+
+
+Total Physical Source Lines of Code (SLOC)                = 9
+Development Effort Estimate, Person-Years (Person-Months) = 0.00 (0.02)
+ (Basic COCOMO model, Person-Months = 2.4 * (KSLOC**1.05))
+Schedule Estimate, Years (Months)                         = 0.04 (0.53)
+ (Basic COCOMO model, Months = 2.5 * (person-months**0.38))
+Estimated Average Number of Developers (Effort/Schedule)  = 0.03
+Total Estimated Cost to Develop                           = $ 192
+ (average salary = $56,286/year, overhead = 2.40).
+SLOCCount, Copyright (C) 2001-2004 David A. Wheeler
+SLOCCount is Open Source Software/Free Software, licensed under the GNU GPL.
+SLOCCount comes with ABSOLUTELY NO WARRANTY, and you are welcome to
+redistribute it under certain conditions as specified by the GNU GPL license;
+see the documentation for details.
+Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
+ian@ian-Latitude-E7440:~/Makefile2$ 
+
